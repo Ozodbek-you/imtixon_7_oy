@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import UserProfile, Post, Comment
+from .models import *
+from .models import Portfolio
+
+@admin.register(Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = ("name", "role")
 
 admin.site.register(UserProfile)
-admin.site.register(Post)
-admin.site.register(Comment)
+admin.site.register(ContactMessage)
+

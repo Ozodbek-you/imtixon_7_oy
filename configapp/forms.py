@@ -1,16 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import UserProfile, Post, Comment
+from .models import UserProfile
+from .models import ContactMessage
 
-
-class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-
+class ContactForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ["username", "email", "password1", "password2"]
-
+        model = ContactMessage
+        fields = ["name", "email", "message"]
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -18,13 +15,10 @@ class UserProfileForm(forms.ModelForm):
         fields = ["bio", "avatar", "website"]
 
 
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ["title", "content"]
 
+class UserLoginForm(forms.Form):
+    username = forms.CharField(label='login', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Login'}))
+    password = forms.CharField(label='parol', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Parol'}))
 
-class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
-        fields = ["content"]
+        fields = ['username', 'password']

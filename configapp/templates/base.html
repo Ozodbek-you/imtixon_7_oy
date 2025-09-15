@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — Professional Portfolio</title>
+  <title>Ozodbek— Professional Portfolio</title>
   <meta name="description" content="A modern, professional portfolio template — unique, elegant and optimized for showcasing projects, skills and contact." />
-  <meta name="author" content="Your Name" />
+  <meta name="author" content="Ozodbek" />
 
   <!--
     PROFESSIONAL PORTFOLIO (single-file)
@@ -268,8 +268,8 @@
       <div class="brand" aria-hidden="false">
         <div class="logo" aria-hidden="true">YN</div>
         <div class="meta">
-          <div class="title">Your Name</div>
-          <div class="tag">Frontend Engineer • UI/UX Designer</div>
+          <div class="title">Ozodbek</div>
+          <div class="tag">Backend Developer</div>
         </div>
       </div>
 
@@ -291,8 +291,11 @@
     <!-- HERO -->
     <section class="hero" id="hero" aria-labelledby="hero-title">
       <div class="intro">
-        <h1 id="hero-title">Salom, men <span style="color:var(--accent-1)">Your Name</span> — veb ishlab chiquvchi va dizayner</h1>
-        <p class="lead">Men zamonaviy, performansga yo‘naltirilgan web-ilovalar yarataman — SPA, e-commerce, dashboardlar va oddiy landing sahifalar. Portfolioim loyihalarimning eng yaxshi namunalarini taqdim etadi.</p>
+        <h1 id="hero-title">Salom, men <span style="color:var(--accent-1)">Ozodbek</span> —Backend Devoloper</h1>
+        <p class="lead">Men zamonaviy va yuqori performansli web-ilovalar yarataman, jumladan REST/GraphQL
+          API bilan ishlaydigan SPA, e-commerce platformalar, admin dashboardlar va oddiy landing sahifalar.
+          Portfolioim backend va frontend loyihalarimning eng yaxshi namunalarini taqdim etadi,
+          u yerda ma’lumotlar bazasi dizayni, server logikasi va API integratsiyasi ko‘rinadi.</p>
 
         <div class="accent-line" aria-hidden="true"></div>
 
@@ -310,7 +313,7 @@
         <div style="margin-top:18px; color:var(--muted)">
           <span style="display:inline-block;margin-right:12px">📍 O‘zbekiston</span>
           <span style="display:inline-block;margin-right:12px">💼 Freelance mavjud</span>
-          <span style="display:inline-block">✉️ <a href="mailto:you@example.com" style="color:var(--accent-2)">you@example.com</a></span>
+          <span style="display:inline-block">✉️ <a href="mailto:ozodbkeaxmadjonov30@gmail.com" style="color:var(--accent-2)">ozodbekaxmadjonov30@gmail.com</a></span>
         </div>
       </div>
 
@@ -320,27 +323,23 @@
           <img id="avatarImg" src="https://picsum.photos/seed/profile/600/600" alt="Profile image" onerror="avatarFallback()">
         </div>
 
-        <div id="profile-name" class="profile-meta">Your Name</div>
-        <div class="profile-role">Frontend • UI/UX • Accessibility</div>
+        <div id="profile-name" class="profile-meta">Ozodbek</div>
+        <div class="profile-role">Backend Devoloper</div>
 
         <div class="info-list" aria-hidden="false" style="margin-top:12px">
-          <div class="info-item">3+ Years Experience</div>
-          <div class="info-item">20+ Projects</div>
-          <div class="info-item">Design & Code</div>
+          <div class="info-item">1 Year Experience</div>
+          <div class="info-item">10 Projects</div>
+          <div class="info-item">Backend</div>
         </div>
 
         <div style="margin-top:12px" class="profile-actions">
           <a class="btn" href="#contact">Start a Project</a>
-          <a href="{% url 'download_cv' %}" class="btn btn-success">
-              📥 CV yuklab olish
-          </a>
+          <a href="{% url 'download_cv' %}" download class="btn btn-success">
+    📥 CV yuklab olish
+</a>
 
         </div>
 
-        <div style="margin-top:12px;color:var(--muted);font-size:.92rem">
-          <label style="cursor:pointer;color:var(--accent-2);font-weight:800">Rasm yuklash</label>
-          <input id="avatarUpload" type="file" accept="image/*" onchange="previewAvatar(event)">
-        </div>
       </aside>
     </section>
 
@@ -355,14 +354,17 @@
 
           <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
             <div style="flex:1;min-width:260px">
-              <p class="muted">Men — veb developerdan tashqari dizaynga ham qiziqaman. Har bir loyiha uchun foydalanuvchi tajribasini birinchi o'ringa qo'yaman. Kod toza, hujjatli va testlangan bo'lishi kerak.</p>
+              <p class="muted">Men — backend dasturchidan tashqari tizim arxitekturasi
+                va ma’lumotlar bazasi dizayniga ham qiziqaman. Har bir loyiha uchun server logikasi,
+                API ishlashi va ma’lumotlar xavfsizligini birinchi o‘ringa qo‘yaman.
+                Kod toza, hujjatli va testlangan bo‘lishi kerak.</p>
+             <ul style="margin-top:12px;line-height:1.8;color:var(--muted)">
+            <li>• Backend: Python, Django, Django REST Framework, FastAPI</li>
+            <li>• Databases: PostgreSQL, MySQL, Redis, MongoDB</li>
+            <li>• Tools & DevOps: Git, Docker, CI/CD, Nginx, Gunicorn</li>
+            <li>• Testing & Security: Unit tests, Integration tests, API security, JWT/Auth</li>
+          </ul>
 
-              <ul style="margin-top:12px;line-height:1.8;color:var(--muted)">
-                <li>• Frontend: HTML, CSS, modern JS (ES6+), React</li>
-                <li>• Backend: Django, Django REST Framework</li>
-                <li>• Tools: Git, Docker, CI/CD</li>
-                <li>• Design: Figma, accessibility, responsive-first</li>
-              </ul>
             </div>
 
             <div style="flex:1;min-width:220px">
@@ -388,13 +390,13 @@
     <!-- Project Card 1 -->
     <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
       <div style="background:linear-gradient(90deg,#6a11cb,#2575fc); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
-        TaskApp
+        NEWS
       </div>
       <div style="padding:20px;">
-        <h3 style="margin:0 0 10px 0;">ToDo & Task Manager</h3>
-        <p style="font-size:14px; line-height:1.6;">Lightweight task manager with reminders and tagging features.</p>
+        <h3 style="margin:0 0 10px 0;">News</h3>
+        <p style="font-size:14px; line-height:1.6;">News</p>
         <p style="margin:10px 0; font-size:13px; color:#bbb;">Django • JS</p>
-        <a href="https://github.com/yourusername/taskapp" target="_blank"
+        <a href="https://github.com/Ozodbek-you/news.git" target="_blank"
            style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
       </div>
     </div>
@@ -402,13 +404,13 @@
     <!-- Project Card 2 -->
     <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
       <div style="background:linear-gradient(90deg,#11998e,#38ef7d); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
-        Blog CMS
+        Hotel
       </div>
       <div style="padding:20px;">
-        <h3 style="margin:0 0 10px 0;">Headless Blog CMS</h3>
+        <h3 style="margin:0 0 10px 0;">Headless Blog Hotel</h3>
         <p style="font-size:14px; line-height:1.6;">API-first blog with markdown editor and RSS feeds.</p>
         <p style="margin:10px 0; font-size:13px; color:#bbb;">Django • DRF</p>
-        <a href="https://github.com/yourusername/blogcms" target="_blank"
+        <a href="https://github.com/Ozodbek-you/mehmonxona.git" target="_blank"
            style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
       </div>
     </div>
@@ -457,15 +459,20 @@
           <div class="accent-line" aria-hidden="true"></div>
 
           <div class="case-grid" style="margin-top:12px">
-            <article class="case" aria-labelledby="case1">
-              <h3 id="case1">Case: Redesign of ACME Shop</h3>
-              <p class="muted">Maqsad: saytdagi konversiyani 28% ga oshirish va chekout jarayonini soddalashtirish. Vazifa: UI redesign, karta oqimi optimizatsiyasi, performans tuning.</p>
-              <ul style="margin-top:8px;color:var(--muted)">
-                <li>• Natija: yuklanish vaqti 1.6s gacha kamaydi</li>
-                <li>• Natija: checkout konversiyasi +18%</li>
-                <li>• Qisqacha texnologiyalar: React, SSR, Lighthouse optimizatsiya</li>
-              </ul>
-            </article>
+           <article class="case" aria-labelledby="case1">
+            <h3 id="case1">Case: Redesign of ACME Shop</h3>
+            <p class="muted">
+              Maqsad: API ishlash tezligini oshirish, server yukini kamaytirish va ma’lumotlar uzatish samaradorligini yaxshilash.<br>
+              Vazifa: backend arxitekturasini optimizatsiya qilish, ma’lumotlar bazasi so‘rovlarini tezlashtirish,
+              kesh va indekslashni joriy qilish, xavfsizlik va autentifikatsiya jarayonlarini mustahkamlash.
+            </p>
+            <ul style="margin-top:8px;color:var(--muted)">
+              <li>• Natija: server javob vaqti 1.6s gacha kamaydi</li>
+              <li>• Natija: API chaqiruvlari samaradorligi +25%</li>
+              <li>• Natija: ma’lumotlar uzatish hajmi optimizatsiyalandi</li>
+              <li>• Qisqacha texnologiyalar: Django, Django REST Framework, PostgreSQL, Redis, Celery</li>
+            </ul>
+          </article>
 
             <article class="case" aria-labelledby="case2">
               <h3 id="case2">Case: Analytics Dashboard</h3>
@@ -525,24 +532,25 @@
         </div>
 
         <!-- Skills -->
-        <div class="card" role="region" aria-labelledby="skills-title">
-          <h3 id="skills-title">Ko'nikmalar</h3>
-          <div style="margin-top:10px" class="skills" aria-hidden="false">
-            <div class="skill-pill">HTML</div>
-            <div class="skill-pill">CSS</div>
-            <div class="skill-pill">JavaScript</div>
-            <div class="skill-pill">React</div>
-            <div class="skill-pill">Django</div>
-            <div class="skill-pill">Accessibility</div>
-            <div class="skill-pill">Performance</div>
-            <div class="skill-pill">Design Systems</div>
-          </div>
-        </div>
+        <div class="card" role="region" aria-labelledby="backend-tags-title">
+  <h3 id="backend-tags-title">Interests</h3>
+  <div class="tags" style="margin-top:10px">
+    <div class="tag">API Development</div>
+    <div class="tag">Database Optimization</div>
+    <div class="tag">Caching Strategies</div>
+    <div class="tag">Server Performance</div>
+    <div class="tag">Automation</div>
+    <div class="tag">DevOps</div>
+  </div>
+</div>
+
 
         <!-- Small bio / Download -->
         <div class="card" role="region" aria-labelledby="bio-title">
           <h3 id="bio-title">Short Bio</h3>
-          <p class="muted">Full-stack-ish but focused on frontend. I ship pixel-perfect UI and robust backends when required. I care about performance, maintainability and accessibility.</p>
+          <p class="muted">Full-stack developer with a strong focus on backend.
+            I build robust APIs, scalable databases, and performant server-side solutions.
+            I prioritize security, maintainability, and efficient data handling.</p>
           <div style="margin-top:10px; display:flex; gap:8px">
             <a class="btn" href="#resume">Download CV</a>
             <a class="btn ghost" href="#projects">Latest Work</a>
@@ -554,11 +562,13 @@
           <h3 id="testi-title">Testimonials</h3>
           <div class="testimonials" style="margin-top:10px">
             <div class="testi">
-              “Delivered above & beyond. Great communication.” <strong>— CEO, StartupX</strong>
-            </div>
-            <div style="height:8px"></div>
-            <div class="testi">
-              “Fast, reactive and pragmatic approach to product design.” <strong>— PM, FinCorp</strong>
+            “Robust backend solutions delivered on time. Excellent API design and performance.” <strong>— CTO, TechCorp</strong>
+          </div>
+          <div style="height:8px"></div>
+          <div class="testi">
+            “Efficient, scalable, and secure backend implementation.” <strong>— Lead Engineer, FinTechX</strong>
+          </div>
+
             </div>
           </div>
         </div>
@@ -580,45 +590,38 @@
 
     <div class="grid-gap"></div>
 
-    <!-- CONTACT & RESUME SECTION -->
-    <section id="contact" class="panel" aria-labelledby="contact-main">
-      <h2 id="contact-main">Kontakt va Rezume</h2>
-      <div class="accent-line" aria-hidden="true"></div>
+    <!-- Contact form -->
+<div>
+  <form method="post" action="{% url 'send_message' %}">
+    {% csrf_token %}
+    <div>
+      <label for="cf-name">Ismingiz</label>
+      <input id="cf-name" name="name" type="text" required placeholder="Ismingiz">
+    </div>
+    <div>
+      <label for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" required placeholder="email@misol.com">
+    </div>
+    <div>
+      <label for="cf-msg">Xabar</label>
+      <textarea id="cf-msg" name="message" placeholder="Xabaringiz..." required></textarea>
+    </div>
 
-      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px">
-        <!-- Contact form -->
-        <div>
-          <form class="contact-form" onsubmit="submitContact(event)" aria-label="Contact form">
-            <div>
-              <label for="cf-name">Ismingiz</label>
-              <input id="cf-name" name="name" type="text" required placeholder="Ismingiz">
-            </div>
-            <div>
-              <label for="cf-email">Email</label>
-              <input id="cf-email" name="email" type="email" required placeholder="email@misol.com">
-            </div>
-            <div>
-              <label for="cf-msg">Xabar</label>
-              <textarea id="cf-msg" name="message" placeholder="Xabaringiz..." required></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button class="btn" type="submit">Yuborish</button>
-              <button class="btn ghost" type="button" onclick="downloadResume()">Resume yuklab olish</button>
-            </div>
-
-            <p id="contactNote" class="muted" style="display:none;margin-top:8px"></p>
-          </form>
-        </div>
+    <div class="form-actions">
+      <button class="btn" type="submit">Yuborish</button>
+    </div>
+  </form>
+</div>
 
         <!-- Resume preview -->
         <aside class="glass-panel" aria-labelledby="resume-title">
           <h3 id="resume-title">Resume (short)</h3>
           <div style="margin-top:8px" class="resume">
             <div class="item">
-              <strong>Frontend Engineer</strong>
+              <strong>Backend Devoloper</strong>
               <div class="muted">2022 — Present • Company A</div>
-              <div style="margin-top:8px;color:var(--muted)">Working on enterprise-grade React apps with focus on UX and performance.</div>
+              <div style="margin-top:8px;color:var(--muted)">Working on enterprise-grade backend systems with
+                focus on scalability, API performance, and data integrity.</div>
             </div>
             <div class="item">
               <strong>Backend / Fullstack</strong>
@@ -639,12 +642,12 @@
     <!-- FOOTER -->
     <footer class="site-footer" role="contentinfo">
       <div style="display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap">
-        <div style="font-weight:800">Your Name</div>
+        <div style="font-weight:800">Ozodbek</div>
         <div class="muted" style="margin-left:8px">— Built for real projects, not demos.</div>
       </div>
 
       <div style="margin-top:12px" class="muted">
-        <span>© <span id="year"></span> Your Name</span>
+        <span>© <span id="year"></span> Ozodbek</span>
         <span style="margin:0 8px">·</span>
         <a href="#" style="color:var(--accent-2);font-weight:700">Twitter</a>
         <span style="margin:0 6px">•</span>
