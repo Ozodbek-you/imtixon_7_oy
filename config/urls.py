@@ -17,9 +17,8 @@ urlpatterns = [
     path("posts/<int:id>/", views.post_detail, name="post_detail"),
     path("posts/<int:id>/edit/", views.post_edit, name="post_edit"),
     path("posts/<int:id>/delete/", views.post_delete, name="post_delete"),
-
+    path("download/cv/", views.download_cv, name="download_cv"),
     path("posts/<int:id>/comments/add/", views.comment_add, name="comment_add"),
-
     path("install/", views.install_demo, name="install"),
 ]
 if settings.DEBUG:

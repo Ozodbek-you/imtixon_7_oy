@@ -1,9 +1,16 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Kirish - MiniBlog{% endblock %}
+
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-success">Login</button>
-</form>
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2 class="text-center mb-4">Kirish</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary w-100 mt-2">Kirish</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

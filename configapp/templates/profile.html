@@ -1,10 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Profil{% endblock %}
+
 {% block content %}
-<h2>{{ profile.user.username }}'s Profile</h2>
-<p><strong>Bio:</strong> {{ profile.bio }}</p>
-{% if profile.avatar %}
-  <img src="{{ profile.avatar.url }}" alt="avatar" width="150">
-{% endif %}
-<p><strong>Website:</strong> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a></p>
-<a href="{% url 'profile_edit' %}" class="btn btn-warning">Edit Profile</a>
+<div class="profile-box mx-auto mt-5" style="max-width:600px;">
+  <h3>👤 {{ user.username }}</h3>
+  <p><b>Email:</b> {{ user.email }}</p>
+  <p><b>Oxirgi login:</b> {{ user.last_login }}</p>
+  <p><b>Ro‘yxatdan o‘tgan:</b> {{ user.date_joined }}</p>
+  <a href="{% url 'post_list' %}" class="btn btn-secondary mt-3">🏠 Bosh sahifa</a>
+</div>
 {% endblock %}

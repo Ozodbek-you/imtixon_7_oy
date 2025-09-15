@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Post Yaratish</title>
-</head>
-<body>
-    <h1>Yangi post yaratish</h1>
-
+{% extends "base.html" %}
+{% block title %}Yangi post{% endblock %}
+{% block content %}
+<div class="card card-soft mx-auto" style="max-width:760px;">
+  <div class="card-body">
+    <h3>Yangi post</h3>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Saqlash</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary">Saqlash</button>
+      <a class="btn btn-light" href="{% url 'post_list' %}">Bekor</a>
     </form>
-
-    <a href="{% url 'posts' %}">Postlar ro‘yxatiga qaytish</a>
-</body>
-</html>
+  </div>
+</div>
+{% endblock %}

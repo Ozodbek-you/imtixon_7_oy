@@ -1,14 +1,86 @@
 from django.shortcuts import render
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-
 from .models import Post, Comment, UserProfile
 from .forms import RegisterForm, UserProfileForm, PostForm, CommentForm
+from django.http import FileResponse, Http404, HttpResponse
+import os
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.colors import HexColor
+from io import BytesIO
+@login_required(login_url='login')
+def download_cv(request):
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    # Orqa fon
+    p.setFillColor(HexColor("#0f1724"))
+    p.rect(0, 0, width, height, fill=1)
+
+    y = height - 50
+
+    # Header
+    p.setFont("Helvetica-Bold", 24)
+    p.setFillColor(HexColor("#6EE7B7"))
+    p.drawString(40, y, "Hi, I'm Adhambek")
+    y -= 30
+
+    # Kirish qismi
+    p.setFont("Helvetica", 12)
+    p.setFillColor(HexColor("#cfeef4"))
+    p.drawString(
+        40, y,
+        "I build fast, accessible and delightful web applications using Django, Python and modern UI patterns."
+    )
+    y -= 40
+
+    # Skills
+    p.setFont("Helvetica-Bold", 14)
+    p.setFillColor(HexColor("#60A5FA"))
+    p.drawString(40, y, "Skills:")
+    y -= 20
+
+    skills = ["Django", "REST API", "PostgreSQL", "HTML", "Celery"]
+    for skill in skills:
+        p.setFont("Helvetica", 12)
+        p.setFillColor(HexColor("#e6eef8"))
+        p.drawString(50, y, f"- {skill}")
+        y -= 15
+
+    y -= 20
+    p.setFont("Helvetica-Bold", 14)
+    p.setFillColor(HexColor("#60A5FA"))
+    p.drawString(40, y, "Experience:")
+    y -= 20
+
+    experiences = [
+        ("2025 — Present", "Backend Developer — Acme Tech"),
+        ("2024 — 2025", "Backend Developer — Freelance"),
+        ("2024 — 2025", "Junior Developer — Startup"),
+    ]
+
+    for time, desc in experiences:
+        p.setFont("Helvetica", 12)
+        p.setFillColor(HexColor("#e6eef8"))
+        p.drawString(50, y, f"{time} | {desc}")
+        y -= 25
+
+    # Tugatish
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename="cv.pdf")
+
 
 
 def register_view(request):

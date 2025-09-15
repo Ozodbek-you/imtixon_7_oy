@@ -1,9 +1,15 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% block title %}Postni tahrirlash{% endblock %}
 {% block content %}
-<h2>Edit Post</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-success">Update</button>
-</form>
+<div class="card card-soft mx-auto" style="max-width:760px;">
+  <div class="card-body">
+    <h3>Postni tahrirlash</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary">Yangilash</button>
+      <a class="btn btn-light" href="{% url 'post_list' %}">Bekor</a>
+    </form>
+  </div>
+</div>
 {% endblock %}
