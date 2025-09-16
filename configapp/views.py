@@ -117,7 +117,7 @@ def download_cv(request):
     for title, desc in projects:
         y = new_page_if_needed(y)
         p.setFont("Helvetica-Bold", 12)
-        p.setFillColor(HexColor("#e6eef8"))
+        p.setFillColor(HexColor("#f9fafb"))
         p.drawString(50, y, f"{title}:")
         y -= 15
         # Description as Paragraph
@@ -130,7 +130,7 @@ def download_cv(request):
     # Case Studies
     y = new_page_if_needed(y)
     p.setFont("Helvetica-Bold", 14)
-    p.setFillColor(HexColor("#60A5FA"))
+    p.setFillColor(HexColor("#f9fafb"))
     p.drawString(40, y, "Case Studies:")
     y -= 20
 
@@ -144,7 +144,7 @@ def download_cv(request):
     for title, desc in case_studies:
         y = new_page_if_needed(y)
         p.setFont("Helvetica-Bold", 12)
-        p.setFillColor(HexColor("#e6eef8"))
+        p.setFillColor(HexColor("#f9fafb"))
         p.drawString(50, y, f"{title}")
         y -= 15
         # Description as Paragraph
@@ -164,16 +164,7 @@ def download_cv(request):
 def base_view(request):
     return render(request, "base.html")
 
-def register_view(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect("home")
-    else:
-        form = RegisterForm()
-    return render(request, "register.html", {"form": form})
+
 
 def login_views(request):
     if request.method == "POST":

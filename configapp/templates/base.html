@@ -279,7 +279,9 @@
         <a href="#projects">Projects</a>
         <a href="#case-studies">Case Studies</a>
         <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact-with-me">Contact</a>
+        <a href="{% url 'login'%}">Login</a>
+        <a href="{% url 'logout' %}">Logout</a>
       </nav>
 
       <div class="cta-buttons" role="group" aria-label="Actions">
@@ -577,12 +579,12 @@
         <div class="card" role="region" aria-labelledby="tags-title">
           <h3 id="tags-title">Interests</h3>
           <div class="tags" style="margin-top:10px">
-            <div class="tag">Open Source</div>
-            <div class="tag">Design Systems</div>
-            <div class="tag">Data Viz</div>
-            <div class="tag">Performance</div>
-            <div class="tag">Teaching</div>
-            <div class="tag">Automation</div>
+            <div class="tag">Python</div>
+            <div class="tag">Django</div>
+            <div class="tag">REST API</div>
+            <div class="tag">Databases (PostgreSQL, MySQL)</div>
+            <div class="tag">Docker</div>
+            <div class="tag">Backend Development</div>
           </div>
         </div>
       </aside>
@@ -591,7 +593,8 @@
     <div class="grid-gap"></div>
 
     <!-- Contact form -->
-<div>
+<div id="contact-with-me">
+   <h3 style="margin:0 0 10px 0;">Contact with me</h3>
   <form method="post" action="{% url 'send_message' %}">
     {% csrf_token %}
     <div>
@@ -649,11 +652,11 @@
       <div style="margin-top:12px" class="muted">
         <span>© <span id="year"></span> Ozodbek</span>
         <span style="margin:0 8px">·</span>
-        <a href="#" style="color:var(--accent-2);font-weight:700">Twitter</a>
+        <a href="https://www.instagram.com/axmadjonovv.o/" style="color:var(--accent-2);font-weight:700">Instagram</a>
         <span style="margin:0 6px">•</span>
-        <a href="#" style="color:var(--accent-1);font-weight:700">LinkedIn</a>
+        <a href="https://t.me/Ahmadjonov_o" style="color:var(--accent-1);font-weight:700">Telegram</a>
         <span style="margin:0 6px">•</span>
-        <a href="#" style="color:var(--muted)">Github</a>
+        <a href="https://github.com/Ozodbek-you" style="color:var(--muted)">Github</a>
       </div>
     </footer>
   </main>
