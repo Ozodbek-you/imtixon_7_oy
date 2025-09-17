@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Projects</h1>
+
+<a href="{% url 'add_project' %}" class="btn">Add New Project</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.title }}</td>
+            <td>{{ project.description|truncatewords:20 }}</td>
+            <td>
+                <a href="{% url 'edit_project' project.id %}">Edit</a> |
+                <a href="{% url 'delete_project' project.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No projects found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
