@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import UserProfile
 from .models import ContactMessage
-
+from .models import Post
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
@@ -14,7 +14,14 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ["bio", "avatar", "website"]
 
-
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ["title", "content"]
+        widgets = {
+            "title": forms.TextInput(attrs={"placeholder": "Sarlavha", "class": "input"}),
+            "content": forms.Textarea(attrs={"placeholder": "Matn", "rows": 6, "class": "textarea"}),
+        }
 
 class UserLoginForm(forms.Form):
     username = forms.CharField(label='login', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Login'}))

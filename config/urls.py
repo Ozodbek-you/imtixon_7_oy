@@ -12,7 +12,8 @@ urlpatterns = [
     path("download/cv/", views.download_cv, name="download_cv"),
     path("send-message/", views.contact_form, name="send_message"),
     path("messages/", views.contact, name="contact"),
-    path('logout/', views.logout_view, name = 'logout')
+    path('logout/', views.logout_view, name = 'logout'),
+    path("dashboard/", views.dashboard, name="dashboard"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import *
 from .forms import  UserProfileForm, UserLoginForm
 from django.http import FileResponse, Http404, HttpResponse
 import os
@@ -18,6 +18,10 @@ from reportlab.platypus import Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from .forms import ContactForm
 from .models import ContactMessage
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Post
+from .forms import PostForm
 
 # Footer form orqali xabar yuborish
 def contact_form(request):
@@ -162,7 +166,15 @@ def download_cv(request):
     return FileResponse(buffer, as_attachment=True, filename="cv.pdf")
 
 def base_view(request):
-    return render(request, "base.html")
+    user = UserProfile.objects.all()
+    portfolio =  Portfolio.objects.all()
+    contact_massage = ContactMessage.objects.all()
+    context = {
+        'user': user,
+        'portfolio': portfolio,
+        'contact_massage': contact_massage
+    }
+    return render(request, "base.html", context= context)
 
 
 
@@ -191,5 +203,37 @@ def logout_view(request):
     return redirect("login")
 
 
+@login_required
+def dashboard(request):
+    # POST orqali create / update / delete amallari bajariladi
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action == "create":
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.save()
+                return redirect("dashboard")
+        elif action == "update":
+            pk = request.POST.get("pk")
+            post = get_object_or_404(Post, pk=pk, author=request.user)
+            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                form.save()
+                return redirect("dashboard")
+        elif action == "delete":
+            pk = request.POST.get("pk")
+            post = get_object_or_404(Post, pk=pk, author=request.user)
+            post.delete()
+            return redirect("dashboard")
 
+    # GET: hamma postlarni olish (faqat hozirgi foydalanuvchiga tegishlilar)
+    posts = Post.objects.filter(author=request.user).order_by("-created_at")
+    add_form = PostForm()
+    # update_form will be filled via JS when "edit" bosiladi (we can pass empty)
+    return render(request, "admin_panel.html", {
+        "posts": posts,
+        "add_form": add_form,
+    })
 

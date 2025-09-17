@@ -322,12 +322,16 @@
       <!-- PROFILE CARD: contains avatar and small bio -->
       <aside class="profile-card" aria-labelledby="profile-name" role="region">
         <div class="avatar" id="avatarBox" title="Click to upload profile image" tabindex="0" role="button" aria-pressed="false" onclick="document.getElementById('avatarUpload').click()">
-          <img id="avatarImg" src="https://picsum.photos/seed/profile/600/600" alt="Profile image" onerror="avatarFallback()">
+              {% if user.avatar %}
+                  <img id="avatarImg" src="{{ user.avatar.url }}" alt="Profile image">
+              {% else %}
+                  <img id="avatarImg" src="https://picsum.photos/seed/profile/600/600" alt="Profile image">
+              {% endif %}
         </div>
 
-        <div id="profile-name" class="profile-meta">Ozodbek</div>
-        <div class="profile-role">Backend Devoloper</div>
-
+        <div id="profile-name" class="profile-meta">{{ user.user.username }}</div>
+          <div class="profile-role">{{ user.role|default:"Backend Developer" }}</div>
+          <p class="lead" style="margin-top:8px;">{{ user.bio }}</p>
         <div class="info-list" aria-hidden="false" style="margin-top:12px">
           <div class="info-item">1 Year Experience</div>
           <div class="info-item">10 Projects</div>
@@ -389,47 +393,22 @@
 
   <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; max-width:1200px; margin:0 auto;">
 
-    <!-- Project Card 1 -->
-    <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-      <div style="background:linear-gradient(90deg,#6a11cb,#2575fc); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
-        NEWS
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; max-width:1200px; margin:0 auto;">
+        {% for p in portfolio %}
+          <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+            <div style="background:linear-gradient(90deg,#6a11cb,#2575fc); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
+              {{ p.name }}
+            </div>
+            <div style="padding:20px;">
+              <h3 style="margin:0 0 10px 0;">{{ p.name }}</h3>
+              <p style="font-size:14px; line-height:1.6;">{{ p.description }}</p>
+              <p style="margin:10px 0; font-size:13px; color:#bbb;">{{ p.skills }}</p>
+              <a href="#" target="_blank" style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-      <div style="padding:20px;">
-        <h3 style="margin:0 0 10px 0;">News</h3>
-        <p style="font-size:14px; line-height:1.6;">News</p>
-        <p style="margin:10px 0; font-size:13px; color:#bbb;">Django • JS</p>
-        <a href="https://github.com/Ozodbek-you/news.git" target="_blank"
-           style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
-      </div>
-    </div>
 
-    <!-- Project Card 2 -->
-    <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-      <div style="background:linear-gradient(90deg,#11998e,#38ef7d); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
-        Hotel
-      </div>
-      <div style="padding:20px;">
-        <h3 style="margin:0 0 10px 0;">Headless Blog Hotel</h3>
-        <p style="font-size:14px; line-height:1.6;">API-first blog with markdown editor and RSS feeds.</p>
-        <p style="margin:10px 0; font-size:13px; color:#bbb;">Django • DRF</p>
-        <a href="https://github.com/Ozodbek-you/mehmonxona.git" target="_blank"
-           style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
-      </div>
-    </div>
-
-    <!-- Project Card 3 -->
-    <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-      <div style="background:linear-gradient(90deg,#ff512f,#dd2476); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
-        Auto Detailing
-      </div>
-      <div style="padding:20px;">
-        <h3 style="margin:0 0 10px 0;">Auto</h3>
-        <p style="font-size:14px; line-height:1.6;">Fast image serving with lazy-loading and lightbox experience.</p>
-        <p style="margin:10px 0; font-size:13px; color:#bbb;">JS • CSS</p>
-        <a href="https://github.com/Ozodbek-you/auto.git" target="_blank"
-           style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -530,7 +509,7 @@
           <h3 id="contact-short-title">Tez aloqa</h3>
           <p class="muted">Agar loyihangiz haqida gaplashmoqchi bo'lsangiz — qisqacha tafsilotni yuboring.</p>
           <a href="#contact" class="btn">Xabar yozish</a>
-          <a href="mailto:you@example.com" class="btn ghost" style="display:block;margin-top:8px">you@example.com</a>
+          <a href="#contact-with-me" class="btn ghost" style="display:block;margin-top:8px">you@example.com</a>
         </div>
 
         <!-- Skills -->
@@ -593,8 +572,8 @@
     <div class="grid-gap"></div>
 
     <!-- Contact form -->
-<div id="contact-with-me">
-   <h3 style="margin:0 0 10px 0;">Contact with me</h3>
+   <div id="contact-with-me">
+  <h3 style="margin:0 0 10px 0;">Contact with me</h3>
   <form method="post" action="{% url 'send_message' %}">
     {% csrf_token %}
     <div>
@@ -609,12 +588,13 @@
       <label for="cf-msg">Xabar</label>
       <textarea id="cf-msg" name="message" placeholder="Xabaringiz..." required></textarea>
     </div>
-
     <div class="form-actions">
       <button class="btn" type="submit">Yuborish</button>
     </div>
   </form>
-</div>
+
+
+
 
         <!-- Resume preview -->
         <aside class="glass-panel" aria-labelledby="resume-title">

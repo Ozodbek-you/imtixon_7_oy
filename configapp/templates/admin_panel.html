@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel — Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{
+      --bg:#f5f7fa; --sidebar:#0f1724; --accent:#1f6feb; --muted:#6b7280;
+    }
+    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg); color:#111;}
+    .wrap{display:flex;min-height:100vh;}
+    .sidebar{
+      width:240px;background:var(--sidebar);color:#fff;padding:24px;box-sizing:border-box;
+    }
+    .sidebar h2{margin:0 0 12px 0;font-size:18px;}
+    .sidebar .btn{display:block;padding:10px 12px;margin:8px 0;border-radius:6px;text-decoration:none;color:#fff;}
+    .sidebar .btn:hover{background:rgba(255,255,255,0.06)}
+    .content{flex:1;padding:24px;box-sizing:border-box;}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+    .card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(13,20,33,0.06);margin-bottom:16px;}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;}
+    /* Post list */
+    .post-item{display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:8px;border:1px solid #eef2f7;}
+    .post-meta{font-size:14px;color:var(--muted);}
+    .actions a{margin-left:8px;text-decoration:none;color:var(--accent);font-weight:600;}
+    /* form */
+    .input, .textarea{width:100%;padding:10px;border:1px solid #e6eef7;border-radius:6px;box-sizing:border-box}
+    .textarea{resize:vertical}
+    .btn-primary{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid #e6eef7;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .hidden{display:none}
+    .small{font-size:13px;color:var(--muted)}
+    @media (max-width:800px){
+      .sidebar{display:none}
+      .wrap{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="sidebar">
+      <h2>🔧 Admin Panel</h2>
+      <div class="small">Siz: {{ request.user.username }}</div>
+      <a href="#" class="btn" id="menu_list">📄 Postlar</a>
+      <a href="#" class="btn" id="menu_add">➕ Yangi post</a>
+      <a href="{% url 'logout' %}" class="btn">🚪 Chiqish</a>
+    </div>
+
+    <div class="content">
+      <div class="topbar">
+        <h1>Dashboard</h1>
+        <div class="small">Bu sahifa orqali postlarni boshqarasiz</div>
+      </div>
+
+      <!-- LIST -->
+      <div id="block_list" class="card">
+        <h3>Mening postlarim</h3>
+        <div class="grid">
+          {% if posts %}
+            {% for post in posts %}
+              <div class="post-item">
+                <div>
+                  <div style="font-weight:600">{{ post.title }}</div>
+                  <div class="post-meta">{{ post.created_at|date:"Y-m-d H:i" }}</div>
+                  <div style="margin-top:8px;color:#333">{{ post.content|linebreaksbr|truncatechars:200 }}</div>
+                </div>
+                <div class="actions">
+                  <a href="#" class="edit-link" data-pk="{{ post.pk }}" data-title="{{ post.title|escapejs }}" data-content="{{ post.content|escapejs }}">✏️ Tahrirlash</a>
+                  <a href="#" class="delete-link" data-pk="{{ post.pk }}" data-title="{{ post.title|escapejs }}">🗑️ O'chirish</a>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="small">Hozircha post yo'q. Yangi post qo'shing.</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ADD / UPDATE FORM (bitta form ham create, ham update uchun ishlaydi) -->
+      <div id="block_form" class="card hidden">
+        <h3 id="form_heading">Yangi post qo'shish</h3>
+
+        <form method="post" id="main_form">
+          {% csrf_token %}
+          <!-- action: create yoki update -->
+          <input type="hidden" name="action" id="form_action" value="create">
+          <input type="hidden" name="pk" id="form_pk" value="">
+          <div style="margin-bottom:10px;">
+            <label>Sarlavha</label>
+            <input name="title" id="field_title" class="input" required>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label>Matn</label>
+            <textarea name="content" id="field_content" class="textarea" required></textarea>
+          </div>
+
+          <div style="display:flex;gap:8px;">
+            <button type="submit" class="btn-primary" id="submit_btn">Saqlash</button>
+            <button type="button" class="btn-ghost" id="cancel_btn">Bekor qilish</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- DELETE CONFIRM -->
+      <div id="block_delete" class="card hidden">
+        <h3>Postni o'chirish</h3>
+        <p id="delete_text">Siz rostdan ham bu postni o'chirmoqchimisiz?</p>
+
+        <form method="post" id="delete_form">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="delete">
+          <input type="hidden" name="pk" id="delete_pk" value="">
+          <button type="submit" class="btn-primary">Ha, o'chirish</button>
+          <button type="button" class="btn-ghost" id="delete_cancel">Bekor qilish</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  // Elementlar
+  const menuList = document.getElementById("menu_list");
+  const menuAdd = document.getElementById("menu_add");
+  const blockList = document.getElementById("block_list");
+  const blockForm = document.getElementById("block_form");
+  const blockDelete = document.getElementById("block_delete");
+  const formAction = document.getElementById("form_action");
+  const formPk = document.getElementById("form_pk");
+  const fieldTitle = document.getElementById("field_title");
+  const fieldContent = document.getElementById("field_content");
+  const formHeading = document.getElementById("form_heading");
+  const submitBtn = document.getElementById("submit_btn");
+  const cancelBtn = document.getElementById("cancel_btn");
+  const deleteText = document.getElementById("delete_text");
+  const deletePk = document.getElementById("delete_pk");
+  const deleteCancel = document.getElementById("delete_cancel");
+
+  // Menyuga bosilganda
+  menuList.addEventListener("click", (e) => {
+    e.preventDefault();
+    showOnly("list");
+  });
+  menuAdd.addEventListener("click", (e) => {
+    e.preventDefault();
+    prepareCreate();
+    showOnly("form");
+  });
+
+  // Edit linklar
+  document.querySelectorAll(".edit-link").forEach(a => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const pk = a.dataset.pk;
+      const title = a.dataset.title || "";
+      const content = a.dataset.content || "";
+      prepareEdit(pk, title, content);
+      showOnly("form");
+    });
+  });
+
+  // Delete linklar
+  document.querySelectorAll(".delete-link").forEach(a => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const pk = a.dataset.pk;
+      const title = a.dataset.title || "";
+      deleteText.textContent = `“${title}” postini o'chirmoqchimisiz?`;
+      deletePk.value = pk;
+      showOnly("delete");
+    });
+  });
+
+  // Cancel knopkalar
+  cancelBtn.addEventListener("click", () => {
+    clearForm();
+    showOnly("list");
+  });
+  deleteCancel.addEventListener("click", () => {
+    showOnly("list");
+  });
+
+  // Functions
+  function showOnly(block){
+    blockList.classList.toggle("hidden", block !== "list");
+    blockForm.classList.toggle("hidden", block !== "form");
+    blockDelete.classList.toggle("hidden", block !== "delete");
+    if(block === "list"){
+      // scroll to top of list
+      blockList.scrollIntoView({behavior:"smooth"});
+    }
+  }
+
+  function prepareCreate(){
+    formAction.value = "create";
+    formPk.value = "";
+    formHeading.textContent = "Yangi post qo'shish";
+    submitBtn.textContent = "Qo'shish";
+    fieldTitle.value = "";
+    fieldContent.value = "";
+  }
+
+  function prepareEdit(pk, title, content){
+    formAction.value = "update";
+    formPk.value = pk;
+    formHeading.textContent = "Postni tahrirlash";
+    submitBtn.textContent = "Saqlash";
+    fieldTitle.value = title;
+    fieldContent.value = content;
+  }
+
+  function clearForm(){
+    formAction.value = "create";
+    formPk.value = "";
+    fieldTitle.value = "";
+    fieldContent.value = "";
+  }
+
+  // Default: list ko'rsatish
+  showOnly("list");
+</script>
+</body>
+</html>
