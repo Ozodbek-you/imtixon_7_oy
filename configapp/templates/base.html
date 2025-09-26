@@ -281,7 +281,6 @@
         <a href="#blog">Blog</a>
         <a href="#contact-with-me">Contact</a>
         <a href="{% url 'login'%}">Login</a>
-        <a href="{% url 'logout' %}">Logout</a>
       </nav>
 
       <div class="cta-buttons" role="group" aria-label="Actions">
@@ -291,127 +290,125 @@
     </header>
 
     <!-- HERO -->
-    <section class="hero" id="hero" aria-labelledby="hero-title">
-      <div class="intro">
-        <h1 id="hero-title">Salom, men <span style="color:var(--accent-1)">Ozodbek</span> —Backend Devoloper</h1>
-        <p class="lead">Men zamonaviy va yuqori performansli web-ilovalar yarataman, jumladan REST/GraphQL
-          API bilan ishlaydigan SPA, e-commerce platformalar, admin dashboardlar va oddiy landing sahifalar.
-          Portfolioim backend va frontend loyihalarimning eng yaxshi namunalarini taqdim etadi,
-          u yerda ma’lumotlar bazasi dizayni, server logikasi va API integratsiyasi ko‘rinadi.</p>
+           <section class="hero" id="hero" aria-labelledby="hero-title">
+          <div class="intro">
+            <h1 id="hero-title">
+              Salom, men <span style="color:var(--accent-1)">{{ profile.user.username }}</span> — {{ profile.role|default:"Backend Developer" }}
+            </h1>
+            <p class="lead">
+              {{ profile.bio }}
+            </p>
 
-        <div class="accent-line" aria-hidden="true"></div>
+            <div class="accent-line" aria-hidden="true"></div>
 
-        <div class="actions" style="margin-top:10px">
-          <a class="btn" href="#projects">Ko‘proq ko‘rish</a>
-          <a class="btn ghost" href="#case-studies">Case studies</a>
-        </div>
-        <!-- HERO bo'limi ichida -->
+            <div class="actions" style="margin-top:10px">
+              <a class="btn" href="#projects">Ko‘proq ko‘rish</a>
+              <a class="btn ghost" href="#case-studies">Case studies</a>
+            </div>
 
-<div class="cta">
-  <a class="btn" href="#contact">Bog‘lanish</a>
-</div>
+            <div class="cta">
+              <a class="btn" href="#contact">Bog‘lanish</a>
+            </div>
 
+            <div style="margin-top:18px; color:var(--muted)">
+              <span style="display:inline-block;margin-right:12px">📍 {{ profile.location }}</span>
+              <span style="display:inline-block;margin-right:12px">💼 {% if profile.is_freelance_available %}Freelance mavjud{% else %}Freelance mavjud emas{% endif %}</span>
+              <span style="display:inline-block">✉️ <a href="mailto:{{ profile.email }}" style="color:var(--accent-2)">{{ profile.email }}</a></span>
+            </div>
+          </div>
 
-        <div style="margin-top:18px; color:var(--muted)">
-          <span style="display:inline-block;margin-right:12px">📍 O‘zbekiston</span>
-          <span style="display:inline-block;margin-right:12px">💼 Freelance mavjud</span>
-          <span style="display:inline-block">✉️ <a href="mailto:ozodbkeaxmadjonov30@gmail.com" style="color:var(--accent-2)">ozodbekaxmadjonov30@gmail.com</a></span>
-        </div>
-      </div>
-
-      <!-- PROFILE CARD: contains avatar and small bio -->
-      <aside class="profile-card" aria-labelledby="profile-name" role="region">
-        <div class="avatar" id="avatarBox" title="Click to upload profile image" tabindex="0" role="button" aria-pressed="false" onclick="document.getElementById('avatarUpload').click()">
-              {% if user.avatar %}
-                  <img id="avatarImg" src="{{ user.avatar.url }}" alt="Profile image">
+          <!-- PROFILE CARD -->
+          <aside class="profile-card" aria-labelledby="profile-name" role="region">
+            <div class="avatar" id="avatarBox" title="Click to upload profile image" tabindex="0" role="button" aria-pressed="false" onclick="document.getElementById('avatarUpload').click()">
+              {% if profile.avatar %}
+                  <img id="avatarImg" src="{{ profile.avatar.url }}" alt="Profile image">
               {% else %}
                   <img id="avatarImg" src="https://picsum.photos/seed/profile/600/600" alt="Profile image">
               {% endif %}
-        </div>
+            </div>
 
-        <div id="profile-name" class="profile-meta">{{ user.user.username }}</div>
-          <div class="profile-role">{{ user.role|default:"Backend Developer" }}</div>
-          <p class="lead" style="margin-top:8px;">{{ user.bio }}</p>
-        <div class="info-list" aria-hidden="false" style="margin-top:12px">
-          <div class="info-item">1 Year Experience</div>
-          <div class="info-item">10 Projects</div>
-          <div class="info-item">Backend</div>
-        </div>
+            <div id="profile-name" class="profile-meta">{{ profile.user.username }}</div>
+            <div class="profile-role">{{ profile.role|default:"Backend Developer" }}</div>
+            <p class="lead" style="margin-top:8px;">{{ profile.bio }}</p>
 
-        <div style="margin-top:12px" class="profile-actions">
-          <a class="btn" href="#contact">Start a Project</a>
-          <a href="{% url 'download_cv' %}" download class="btn btn-success">
-    📥 CV yuklab olish
-</a>
+            <div class="info-list" aria-hidden="false" style="margin-top:12px">
+              <div class="info-item">{{ profile.experience }}</div>
+              <div class="info-item">{{ profile.projects_count }}</div>
+              <div class="info-item">Backend</div>
+            </div>
 
-        </div>
+            <div style="margin-top:12px" class="profile-actions">
+              <a class="btn" href="#contact">Start a Project</a>
+              <a href="{% url 'download_cv' %}" download class="btn btn-success">📥 CV yuklab olish</a>
+            </div>
+          </aside>
+        </section>
 
-      </aside>
-    </section>
 
     <!-- MAIN GRID -->
     <div class="grid" role="section" aria-label="Main content">
       <!-- LEFT COLUMN -->
       <div>
         <!-- ABOUT -->
-        <section class="panel" id="about" aria-labelledby="about-title">
+                <<section class="panel" id="about" aria-labelledby="about-title">
           <h2 id="about-title">Men haqimda</h2>
           <div class="accent-line" aria-hidden="true"></div>
 
           <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
             <div style="flex:1;min-width:260px">
-              <p class="muted">Men — backend dasturchidan tashqari tizim arxitekturasi
-                va ma’lumotlar bazasi dizayniga ham qiziqaman. Har bir loyiha uchun server logikasi,
-                API ishlashi va ma’lumotlar xavfsizligini birinchi o‘ringa qo‘yaman.
-                Kod toza, hujjatli va testlangan bo‘lishi kerak.</p>
-             <ul style="margin-top:12px;line-height:1.8;color:var(--muted)">
-            <li>• Backend: Python, Django, Django REST Framework, FastAPI</li>
-            <li>• Databases: PostgreSQL, MySQL, Redis, MongoDB</li>
-            <li>• Tools & DevOps: Git, Docker, CI/CD, Nginx, Gunicorn</li>
-            <li>• Testing & Security: Unit tests, Integration tests, API security, JWT/Auth</li>
-          </ul>
-
+              <p class="muted">
+                {{ profile.bio }}
+              </p>
+              <ul style="margin-top:12px;line-height:1.8;color:var(--muted)">
+                <li>• Backend: {{ profile.backend_skills|default:"Python, Django, Django REST Framework, FastAPI" }}</li>
+                <li>• Databases: {{ profile.databases|default:"PostgreSQL, MySQL, Redis, MongoDB" }}</li>
+                <li>• Tools & DevOps: {{ profile.tools|default:"Git, Docker, CI/CD, Nginx, Gunicorn" }}</li>
+                <li>• Testing & Security: {{ profile.testing|default:"Unit tests, Integration tests, API security, JWT/Auth" }}</li>
+              </ul>
             </div>
 
             <div style="flex:1;min-width:220px">
               <div class="muted-block">
                 <strong>Quick facts</strong>
                 <div style="margin-top:8px;color:var(--muted)">
-                  <div>• Available for freelance & full-time</div>
-                  <div>• Remote work preferred</div>
-                  <div>• Open-source contributor</div>
+                  <div>• Available for freelance & full-time: {{ profile.is_freelance_available|yesno:"Yes,No" }}</div>
+                  <div>• Location: {{ profile.location }}</div>
+                  <div>• Experience: {{ profile.experience }}</div>
+                  <div>• Projects count: {{ profile.projects_count }}</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+
         <div class="grid-gap"></div>
 <!-- Projects Section -->
-<section id="projects" style="padding:60px 0; background:#0d1b2a; color:#fff;">
-  <h2 style="text-align:center; font-size:32px; margin-bottom:40px;">Loyihalar</h2>
+          <section id="projects" style="padding:60px 0; background:#0d1b2a; color:#fff;">
+            <h2 style="text-align:center; font-size:32px; margin-bottom:40px;">Loyihalar</h2>
 
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; max-width:1200px; margin:0 auto;">
-
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; max-width:1200px; margin:0 auto;">
-        {% for p in portfolio %}
-          <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-            <div style="background:linear-gradient(90deg,#6a11cb,#2575fc); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
-              {{ p.name }}
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; max-width:1200px; margin:0 auto;">
+              {% for p in portfolio %}
+                <div style="background:#1b263b; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+                  {% if p.thumbnail %}
+                    <img src="{{ p.thumbnail.url }}" alt="{{ p.name }}" style="width:100%; height:200px; object-fit:cover;">
+                  {% endif %}
+                  <div style="background:linear-gradient(90deg,#6a11cb,#2575fc); padding:20px; text-align:center; font-size:22px; font-weight:bold;">
+                    {{ p.name }}
+                  </div>
+                  <div style="padding:20px;">
+                    <h3 style="margin:0 0 10px 0;">{{ p.name }}</h3>
+                    <p style="font-size:14px; line-height:1.6;">{{ p.description }}</p>
+                    <p style="margin:10px 0; font-size:13px; color:#bbb;">{{ p.skills }}</p>
+                    <a href="#" target="_blank" style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
+                  </div>
+                </div>
+              {% empty %}
+                <p style="color:#fff; text-align:center;">Hozircha loyiha mavjud emas.</p>
+              {% endfor %}
             </div>
-            <div style="padding:20px;">
-              <h3 style="margin:0 0 10px 0;">{{ p.name }}</h3>
-              <p style="font-size:14px; line-height:1.6;">{{ p.description }}</p>
-              <p style="margin:10px 0; font-size:13px; color:#bbb;">{{ p.skills }}</p>
-              <a href="#" target="_blank" style="display:inline-block; padding:8px 16px; background:#00b4d8; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;">Details</a>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
+          </section>
 
-
-  </div>
-</section>
 
 
 
@@ -440,67 +437,57 @@
           <div class="accent-line" aria-hidden="true"></div>
 
           <div class="case-grid" style="margin-top:12px">
-           <article class="case" aria-labelledby="case1">
-            <h3 id="case1">Case: Redesign of ACME Shop</h3>
-            <p class="muted">
-              Maqsad: API ishlash tezligini oshirish, server yukini kamaytirish va ma’lumotlar uzatish samaradorligini yaxshilash.<br>
-              Vazifa: backend arxitekturasini optimizatsiya qilish, ma’lumotlar bazasi so‘rovlarini tezlashtirish,
-              kesh va indekslashni joriy qilish, xavfsizlik va autentifikatsiya jarayonlarini mustahkamlash.
-            </p>
-            <ul style="margin-top:8px;color:var(--muted)">
-              <li>• Natija: server javob vaqti 1.6s gacha kamaydi</li>
-              <li>• Natija: API chaqiruvlari samaradorligi +25%</li>
-              <li>• Natija: ma’lumotlar uzatish hajmi optimizatsiyalandi</li>
-              <li>• Qisqacha texnologiyalar: Django, Django REST Framework, PostgreSQL, Redis, Celery</li>
-            </ul>
-          </article>
+            {% for case in case_studies %}
+            <article class="case" aria-labelledby="case{{ case.id }}">
+              <h3 id="case{{ case.id }}">Case: {{ case.title }}</h3>
+              <p class="muted">{{ case.description|linebreaks }}</p>
 
-            <article class="case" aria-labelledby="case2">
-              <h3 id="case2">Case: Analytics Dashboard</h3>
-              <p class="muted">Maqsad: murakkab ma'lumotlarni chiroyli va interfaol ko'rsatish. Vizualizatsiya va filtrlar asosiy talablar.</p>
               <ul style="margin-top:8px;color:var(--muted)">
-                <li>• D3.js bilan interaktiv diagrammalar</li>
-                <li>• Server tomonidan cache va pagination</li>
-                <li>• API talablarini qisqartirish uchun aggregatsiya</li>
+                {% for line in case.results.splitlines %}
+                  <li>• {{ line }}</li>
+                {% endfor %}
+                <li>• Qisqacha texnologiyalar: {{ case.technologies }}</li>
               </ul>
             </article>
+            {% empty %}
+            <p class="muted">Hozircha hech qanday case study qo‘shilmagan.</p>
+            {% endfor %}
           </div>
         </section>
 
-        <div class="grid-gap"></div>
+      <div class="grid-gap"></div>
+
+
 
         <!-- BLOG PREVIEW -->
         <section class="panel" id="blog" aria-labelledby="blog-title">
-          <h2 id="blog-title">Blog & Articles</h2>
-          <div class="accent-line" aria-hidden="true"></div>
+            <h2 id="blog-title">Blog & Articles</h2>
+            <div class="accent-line" aria-hidden="true"></div>
 
-          <div class="blog-list" style="margin-top:12px">
-            <article class="post" aria-labelledby="post1">
-              <div class="post-thumb" aria-hidden="true"><img src="https://picsum.photos/seed/b1/300/200" alt="Blog image"></div>
-              <div>
-                <h4 id="post1">How I approach front-end architecture</h4>
-                <p class="muted">Modular, testable and maintainable frontend — a short guide for teams and solo devs.</p>
-              </div>
-            </article>
+            <div class="blog-list" style="margin-top:12px">
+              {% for post in blog_posts %}
+                <article class="post" aria-labelledby="post{{ forloop.counter }}">
+                  <div class="post-thumb" aria-hidden="true">
+                    {% if post.thumbnail %}
+                      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                    {% else %}
+                      <img src="https://picsum.photos/seed/blog{{ forloop.counter }}/300/200" alt="Blog image">
+                    {% endif %}
+                  </div>
+                  <div>
+                    <h4 id="post{{ forloop.counter }}">{{ post.title }}</h4>
+                    <p class="muted">{{ post.summary }}</p>
+                    {% if post.full_url %}
+                      <a href="{{ post.full_url }}" class="btn ghost" target="_blank">Batafsil o‘qish</a>
+                    {% endif %}
+                  </div>
+                </article>
+              {% empty %}
+                <p>Hozircha blog postlar mavjud emas.</p>
+              {% endfor %}
+            </div>
+          </section>
 
-            <article class="post" aria-labelledby="post2">
-              <div class="post-thumb" aria-hidden="true"><img src="https://picsum.photos/seed/b2/300/200" alt="Blog image"></div>
-              <div>
-                <h4 id="post2">Optimizing React for large apps</h4>
-                <p class="muted">Performance techniques: code splitting, memoization, virtualization and SSR basics.</p>
-              </div>
-            </article>
-
-            <article class="post" aria-labelledby="post3">
-              <div class="post-thumb" aria-hidden="true"><img src="https://picsum.photos/seed/b3/300/200" alt="Blog image"></div>
-              <div>
-                <h4 id="post3">Accessible UI: checklist</h4>
-                <p class="muted">A practical accessibility checklist you can run through during builds and reviews.</p>
-              </div>
-            </article>
-          </div>
-        </section>
-      </div>
 
       <!-- RIGHT COLUMN (Sidebar) -->
       <aside class="side" role="complementary" aria-label="Sidebar">

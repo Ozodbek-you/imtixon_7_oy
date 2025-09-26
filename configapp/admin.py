@@ -7,5 +7,5 @@ from .models import *
 #     list_display = ("name", "role")
 
 # admin.site.register(UserProfile)
-admin.site.register(ContactMessage)
+admin.site.register([ContactMessage, ResumeItem, Testimonial,BlogPost,CaseStudy,Project,Profile])
 

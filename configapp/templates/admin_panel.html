@@ -11,14 +11,14 @@
       font-family: 'Inter', sans-serif;
       display: flex;
       min-height: 100vh;
-      background: #eef2f7;
+      background: #f8fafc; /* Engil kulrang fon */
       color: #1f2937;
     }
 
     /* Sidebar */
     .sidebar {
       width: 250px;
-      background: #111827;
+      background: #111827; /* To'q ko'k fon */
       color: #fff;
       flex-shrink: 0;
       display: flex;
@@ -26,14 +26,17 @@
       position: fixed;
       height: 100%;
       padding: 25px 15px;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2); /* Kengroq soya */
+      z-index: 1000;
     }
     .sidebar h2 {
       font-size: 24px;
       text-align: center;
-      color: #3b82f6;
+      color: #3b82f6; /* Moviy rangli sarlavha */
       margin-bottom: 40px;
       font-weight: 700;
+      text-transform: uppercase; /* Matnni katta harflar bilan yozish */
+      letter-spacing: 1px;
     }
     .sidebar ul {
       list-style: none;
@@ -42,58 +45,69 @@
       flex-grow: 1;
     }
     .sidebar ul li {
-      margin-bottom: 15px;
+      margin-bottom: 10px; /* Masofani kamaytirish */
     }
     .sidebar ul li a {
-      display: block;
+      display: flex; /* Elementlarni markazga joylash */
+      align-items: center;
       padding: 12px 18px;
       border-radius: 8px;
       color: #d1d5db;
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.3s;
+      transition: all 0.3s ease; /* Yumshoqroq o'tish effekti */
     }
-    .sidebar ul li a:hover {
-      background: #1e40af;
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+      background: #2563eb; /* Moviy rang fon */
       color: #fff;
+      box-shadow: 0 4px 10px rgba(37,99,235,0.3); /* Soyali effekt */
+    }
+    .sidebar ul li a svg {
+      margin-right: 12px;
+      width: 20px;
+      height: 20px;
     }
 
     /* Main content */
     .main {
       margin-left: 250px;
-      padding: 30px;
+      padding: 40px; /* Paddingni oshirish */
       flex-grow: 1;
       width: calc(100% - 250px);
     }
     .main h1 {
-      font-size: 28px;
+      font-size: 32px; /* Kichikroq o'lcham */
       margin-bottom: 25px;
       color: #1e293b;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
     }
 
     /* Card */
     .card {
       background: #fff;
       border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 30px; /* Paddingni oshirish */
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Kengroq soya */
       margin-bottom: 30px;
+      border-left: 5px solid #2563eb; /* Moviy chap qirra */
     }
     .card h3 {
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 15px;
       color: #2563eb;
     }
 
     /* Form */
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 6px;
-      color: #374151;
+      margin-bottom: 8px;
+      color: #4b5563;
     }
     .form-group input,
     .form-group textarea {
@@ -101,21 +115,23 @@
       padding: 12px 14px;
       border-radius: 8px;
       border: 1px solid #d1d5db;
+      background-color: #f9fafb; /* Engil kulrang fon */
       outline: none;
       transition: border-color 0.3s, box-shadow 0.3s;
-      font-size: 14px;
+      font-size: 15px;
+      color: #374151;
     }
     .form-group input:focus,
     .form-group textarea:focus {
       border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.3); /* Kengroq soya */
     }
 
     /* Buttons */
     .btn {
       display: inline-block;
-      padding: 10px 20px;
-      font-size: 14px;
+      padding: 12px 24px;
+      font-size: 16px;
       font-weight: 600;
       color: #fff;
       background: #2563eb;
@@ -125,42 +141,54 @@
       transition: all 0.3s;
       text-decoration: none;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(37,99,235,0.2);
     }
     .btn:hover {
       background: #1e40af;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37,99,235,0.3);
     }
     .btn-danger {
       background: #dc2626;
+      box-shadow: 0 4px 10px rgba(220,38,38,0.2);
     }
     .btn-danger:hover {
       background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(220,38,38,0.3);
     }
 
     /* Table */
     .projects-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
-      border-radius: 8px;
+      margin-top: 20px;
+      border-radius: 12px; /* Kengroq qirralar */
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
     .projects-table th,
     .projects-table td {
-      padding: 12px 15px;
+      padding: 15px; /* Paddingni oshirish */
       text-align: left;
-      font-size: 14px;
+      font-size: 15px;
     }
     .projects-table th {
       background: #1f2937;
       color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
     }
     .projects-table tr:nth-child(even) {
-      background: #f3f4f6;
+      background: #f1f5f9; /* Engil kulrang fon */
+    }
+    .projects-table tr:hover {
+      background-color: #e2e8f0; /* Sichqoncha ustiga borganda fon rangi */
     }
     .projects-table a {
       color: #2563eb;
       text-decoration: none;
+      font-weight: 600;
     }
     .projects-table a:hover {
       text-decoration: underline;
@@ -170,10 +198,19 @@
     @media(max-width: 768px) {
       .sidebar {
         width: 200px;
+        padding: 20px 10px;
       }
       .main {
         margin-left: 200px;
         width: calc(100% - 200px);
+        padding: 20px;
+      }
+      .sidebar h2 {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+      .sidebar ul li a {
+        padding: 10px 15px;
       }
     }
     @media(max-width: 576px) {
@@ -188,13 +225,13 @@
       .main {
         margin-left: 0;
         width: 100%;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
   <div class="sidebar">
     <h2>Portfolio Admin</h2>
     <ul>
@@ -207,7 +244,6 @@
     </ul>
   </div>
 
-  <!-- Main Content -->
   <div class="main">
     <h1>Dashboard</h1>
     <div class="card">
@@ -215,7 +251,6 @@
       <p>Manage projects, view messages, and update your profile here.</p>
     </div>
 
-    <!-- Example Projects Table -->
     <div class="card">
       <h3>Projects List</h3>
       <table class="projects-table">

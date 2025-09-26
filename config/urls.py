@@ -1,7 +1,10 @@
 # from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 from configapp import views
 # from configapp.views import *
-# from django.contrib import admin
+from django.contrib import admin
 # from django.conf import settings
 # from django.conf.urls.static import static
 #
@@ -55,15 +58,16 @@ from django.urls import path
 # from  import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.index, name='base'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('admin/', views.admin, name='admin_panel'),
+    path('admin_p/', views.admin_panel, name='admin_panel'),
 
     # Project CRUD
     path('projects/', views.projects_list, name='projects_list'),
-    path('projects/add/', views.add_project, name='add_project'),
-    path('projects/edit/<int:id>/', views.edit_project, name='edit_project'),
+    path('projects/add/', views.add_projects, name='add_project'),
+    path('projects/edit/<int:id>/', views.update_project, name='update_project'),
     path('projects/delete/<int:id>/', views.delete_project, name='delete_project'),
 
     # Profile
@@ -75,3 +79,5 @@ urlpatterns = [
     # Download CV
     path('download-cv/', views.download_cv, name='download_cv'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
